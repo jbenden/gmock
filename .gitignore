@@ -1,0 +1,17 @@
+*.so
+*.a
+*.la
+*.dylib
+*.lib
+*.dll
+CMakeFiles
+gmock*_test
+gmock*_test_
+gtest*_test
+gtest*_test_
+CMakeCache.txt
+Makefile
+shared_gmock_test_
+cmake_install.cmake
+Testing
+CTestTestfile.cmake

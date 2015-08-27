@@ -603,7 +603,7 @@ TEST(StlContainerViewTest, WorksForStaticNativeArray) {
   int a1[3] = { 0, 1, 2 };
   NativeArray<int> a2 = StlContainerView<int[3]>::ConstReference(a1);
   EXPECT_EQ(3U, a2.size());
-  EXPECT_EQ(a1, a2.begin());
+  EXPECT_EQ(a1, *(a2.begin()));
 
   const NativeArray<int> a3 = StlContainerView<int[3]>::Copy(a1);
   ASSERT_EQ(3U, a3.size());
@@ -630,7 +630,7 @@ TEST(StlContainerViewTest, WorksForDynamicNativeArray) {
   NativeArray<int> a2 = StlContainerView<tuple<const int*, int> >::
       ConstReference(make_tuple(p1, 3));
   EXPECT_EQ(3U, a2.size());
-  EXPECT_EQ(a1, a2.begin());
+  EXPECT_EQ(a1, *(a2.begin()));
 
   const NativeArray<int> a3 = StlContainerView<tuple<int*, size_t> >::
       Copy(make_tuple(static_cast<int*>(a1), 3));

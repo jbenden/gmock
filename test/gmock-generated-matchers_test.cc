@@ -229,7 +229,7 @@ TEST(ArgsTest, ExplainsMatchResultWithoutInnerExplanation) {
 // For testing Args<>'s explanation.
 class LessThanMatcher : public MatcherInterface<tuple<char, int> > {
  public:
-  virtual void DescribeTo(::std::ostream* os) const {}
+  virtual void DescribeTo(::std::ostream*) const {}
 
   virtual bool MatchAndExplain(tuple<char, int> value,
                                MatchResultListener* listener) const {

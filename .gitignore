@@ -15,3 +15,4 @@ shared_gmock_test_
 cmake_install.cmake
 Testing
 CTestTestfile.cmake
+gmock-spec-builders_test.plist

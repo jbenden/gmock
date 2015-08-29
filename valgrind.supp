@@ -1,0 +1,28 @@
+{
+   allow_leak_test
+   Memcheck:Leak
+   ...
+   fun:*AllowLeakTest*
+   ...
+}
+{
+   allow_leak_test
+   Memcheck:Leak
+   ...
+   fun:*LeakTest*
+   ...
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   ...
+   fun:*PrintByteSegmentInObjectTo*
+   ...
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   ...
+   fun:*PrintByteSegmentInObjectTo*
+   ...
+}

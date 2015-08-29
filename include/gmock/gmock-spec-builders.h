@@ -1370,6 +1370,8 @@ class ActionResultHolder : public UntypedActionResultHolderBase {
 template <>
 class ActionResultHolder<void> : public UntypedActionResultHolderBase {
  public:
+  ActionResultHolder() {}
+
   void GetValueAndDelete() const { delete this; }
 
   virtual void PrintAsActionResult(::std::ostream* /* os */) const {}

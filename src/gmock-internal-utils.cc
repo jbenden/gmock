@@ -46,6 +46,14 @@
 
 namespace testing {
 namespace internal {
+class FailureReporterInterface;
+};
+};
+
+testing::internal::FailureReporterInterface* failure_reporter = NULL;
+
+namespace testing {
+namespace internal {
 
 // Converts an identifier name to a space-separated list of lower-case
 // words.  Each maximum substring of the form [A-Za-z][a-z]*|\d+ is
@@ -89,6 +97,7 @@ class GoogleTestFailureReporter : public FailureReporterInterface {
   }
 };
 
+
 // Returns the global failure reporter.  Will create a
 // GoogleTestFailureReporter and return it the first time called.
 GTEST_API_ FailureReporterInterface* GetFailureReporter() {
@@ -97,8 +106,8 @@ GTEST_API_ FailureReporterInterface* GetFailureReporter() {
   // thread-safe.  We may need to add additional synchronization to
   // protect failure_reporter if we port Google Mock to other
   // compilers.
-  static FailureReporterInterface* const failure_reporter =
-      new GoogleTestFailureReporter();
+  if (!failure_reporter)
+    failure_reporter = new GoogleTestFailureReporter();
   return failure_reporter;
 }
 

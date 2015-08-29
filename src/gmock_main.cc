@@ -32,6 +32,9 @@
 #include <iostream>
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "gmock/internal/gmock-internal-utils.h"
+
+extern testing::internal::FailureReporterInterface* failure_reporter;
 
 // MS C++ compiler/linker has a bug on Windows (not on Windows CE), which
 // causes a link error when _tmain is defined in a static library and UNICODE
@@ -50,5 +53,7 @@ GTEST_API_ int main(int argc, char** argv) {
   // also responsible for initializing Google Test.  Therefore there's
   // no need for calling testing::InitGoogleTest() separately.
   testing::InitGoogleMock(&argc, argv);
-  return RUN_ALL_TESTS();
+  int result = RUN_ALL_TESTS();
+  if (failure_reporter) delete failure_reporter;
+  return result;
 }

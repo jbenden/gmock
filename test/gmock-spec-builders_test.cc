@@ -1938,6 +1938,9 @@ inline void operator<<(::std::ostream& os, const Printable&) {
 
 struct Unprintable {
   Unprintable() : value(0) {}
+  Unprintable(int v) : value(v) {}
+  Unprintable(const Unprintable& rhs) : value(rhs.value) {}
+  const Unprintable& operator= (const Unprintable& rhs) { value = rhs.value; return *this; }
   int value;
 };
 
@@ -2594,6 +2597,8 @@ TEST(SynchronizationTest, CanCallMockMethodInAction) {
 
 }  // namespace
 
+extern testing::internal::FailureReporterInterface* failure_reporter;
+
 // Allows the user to define his own main and then invoke gmock_main
 // from it. This might be necessary on some platforms which require
 // specific setup and teardown.
@@ -2609,5 +2614,7 @@ int main(int argc, char **argv) {
   testing::GMOCK_FLAG(catch_leaked_mocks) = true;
   testing::GMOCK_FLAG(verbose) = testing::internal::kWarningVerbosity;
 
-  return RUN_ALL_TESTS();
+  int res = RUN_ALL_TESTS();
+  if (failure_reporter) delete failure_reporter;
+  return res;
 }
